@@ -14,26 +14,27 @@ function NavBar() {
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+useEffect(() => {
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    const diff = currentScrollY - lastScrollY.current;
 
-      if (currentScrollY < 50) {
-        setVisible(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        // scrolling down
-        setVisible(false);
-      } else if (lastScrollY.current - currentScrollY > 5) {
-        // scrolled up slightly (threshold avoids jitter)
-        setVisible(true);
-      }
+    if (currentScrollY < 50) {
+      setVisible(true);
+    } else if (diff > 5) {
+      // scrolling down
+      setVisible(false);
+    } else if (diff < -5) {
+      // scrolling up
+      setVisible(true);
+    }
 
-      lastScrollY.current = currentScrollY;
-    };
+    lastScrollY.current = currentScrollY;
+  };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   return (
     <nav
