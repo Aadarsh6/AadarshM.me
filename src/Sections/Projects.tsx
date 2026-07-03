@@ -2,8 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "../Data/Project";
 import ProjectCard from "../components/ProjectCard";
-import ProjectDetail from "../components/ProjectDetail";
+// import ProjectDetail from "../components/ProjectDetail";
 import type { Project } from "../Data/Project";
+import ProjectDetail from "../components/ProjectDetails";
 
 function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
