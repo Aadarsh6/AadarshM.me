@@ -5,12 +5,14 @@ import About from "./Sections/About";
 import Skills from "./Sections/Skills";
 import Projects from "./Sections/Projects";
 import Contact from "./Sections/Contsct";
+import CustomCursor from "./components/Ui/CustomCursor";
 
 function Portfolio() {
   return (
     <>
       <NavBar />
       <main>
+        <CustomCursor/>
         <Hero />
         <About />
         <Skills />

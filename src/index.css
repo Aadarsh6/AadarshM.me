@@ -34,3 +34,7 @@ body::before {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@media (min-width: 768px) {
+  body { cursor: none; }
+}

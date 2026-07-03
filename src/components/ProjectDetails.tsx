@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { motion, useMotionValueEvent, useScroll, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import type { Project } from "../Data/Project";
 
@@ -10,20 +10,35 @@ interface ProjectDetailProps {
 
 function ProjectDetail({ project, onClose }: ProjectDetailProps) {
   const [active, setActive] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const { scrollYProgress } = useScroll({
-    container: ref,
-    offset: ["start start", "end start"],
-  });
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const breakpoints = project.sections.map((_, i) => i / project.sections.length);
-    const closest = breakpoints.reduce((acc, bp, i) => {
-      return Math.abs(latest - bp) < Math.abs(latest - breakpoints[acc]) ? i : acc;
-    }, 0);
-    setActive(closest);
-  });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = sectionRefs.current.findIndex((el) => el === entry.target);
+            if (index !== -1) setActive(index);
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.5, // section counts as "active" once 50% visible
+        rootMargin: "-20% 0px -20% 0px", // biases toward the middle of the viewport
+      }
+    );
+
+    sectionRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [project]);
 
   return (
     <AnimatePresence>
@@ -41,16 +56,13 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
         </button>
 
         <div
-          ref={ref}
+          ref={scrollRef}
           className="no-scrollbar h-full overflow-y-auto flex flex-col lg:flex-row gap-10 px-6 lg:px-16 py-20 max-w-6xl mx-auto"
         >
           <div className="lg:w-1/2">
-            <motion.h2
-              layoutId={`title-${project.id}`}
-              className="font-display text-3xl md:text-5xl font-bold mb-2"
-            >
+            <h2 className="font-display text-3xl md:text-5xl font-bold mb-2">
               {project.title}
-            </motion.h2>
+            </h2>
 
             <div className="flex flex-wrap gap-2 mt-4 mb-16">
               {project.tech.map((t) => (
@@ -61,15 +73,21 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             </div>
 
             {project.sections.map((section, i) => (
-              <div key={section.label} className="mb-24 last:mb-10">
+              <div
+                key={section.label}
+                ref={(el) => { sectionRefs.current[i] = el; }}
+                className="mb-24 last:mb-10 min-h-[40vh]"
+              >
                 <motion.p
                   animate={{ opacity: active === i ? 1 : 0.3 }}
+                  transition={{ duration: 0.3 }}
                   className="text-sm font-medium text-accent mb-2"
                 >
                   {section.label}
                 </motion.p>
                 <motion.p
                   animate={{ opacity: active === i ? 1 : 0.3 }}
+                  transition={{ duration: 0.3 }}
                   className="text-lg text-black/70 dark:text-white/70 leading-relaxed"
                 >
                   {section.content}
