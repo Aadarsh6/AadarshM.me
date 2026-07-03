@@ -18,6 +18,7 @@
 // export default Portfolio;
 
 import NavBar from "./components/NavBar";
+import About from "./Sections/About";
 import Hero from "./Sections/Hero";
 import Skills from "./Sections/Skills";
 
@@ -27,6 +28,7 @@ function Portfolio() {
       <NavBar />
       <main>
         <Hero />
+        <About/>
         <Skills />
       </main>
     </>
