@@ -5,14 +5,15 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-center px-6 max-w-5xl mx-auto relative"
+      className="min-h-screen flex flex-col justify-center px-6 max-w-5xl mx-auto relative overflow-hidden"
     >
-        <GradientBlob/>
+      <GradientBlob />
+
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-accent font-medium mb-4 tracking-wide"
+        className="text-accent font-medium mb-4 tracking-wide text-sm md:text-base"
       >
         Hi, I'm YourName 👋
       </motion.p>
@@ -21,7 +22,7 @@ function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="font-display text-5xl md:text-7xl font-bold leading-tight max-w-3xl"
+        className="font-display text-5xl md:text-7xl font-bold leading-[1.1] max-w-3xl"
       >
         Your bold positioning statement goes here.
       </motion.h1>
@@ -30,7 +31,7 @@ function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="mt-6 text-lg text-black/60 dark:text-white/60 max-w-xl"
+        className="mt-6 text-lg leading-relaxed text-black/60 dark:text-white/60 max-w-xl"
       >
         A one-to-two line subline explaining what you do, for who, and why it matters.
       </motion.p>
@@ -39,23 +40,22 @@ function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="mt-8 flex gap-4"
+        className="mt-10 flex gap-4"
       >
-        <a  
+        <a
           href="#projects"
-          className="px-6 py-3 rounded-full bg-accent text-white font-medium hover:opacity-90 transition-opacity"
+          className="px-6 py-3.5 rounded-full bg-accent text-white font-medium shadow-[0_8px_24px_-8px_rgba(255,90,31,0.5)] transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_12px_28px_-8px_rgba(255,90,31,0.6)] active:scale-[0.98]"
         >
           View my work
         </a>
         <a
           href="#contact"
-          className="px-6 py-3 rounded-full border border-black/10 dark:border-white/20 font-medium hover:border-accent transition-colors"
+          className="px-6 py-3.5 rounded-full border border-black/10 dark:border-white/20 font-medium transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:scale-[1.02] active:scale-[0.98]"
         >
           Get in touch
         </a>
       </motion.div>
 
-      {/* scroll cue */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
