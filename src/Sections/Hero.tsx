@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import GradientBlob from "../components/Ui/GradientBlob";
 
 function Hero() {
   return (
@@ -6,6 +7,7 @@ function Hero() {
       id="hero"
       className="min-h-screen flex flex-col justify-center px-6 max-w-5xl mx-auto relative"
     >
+        <GradientBlob/>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
