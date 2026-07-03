@@ -18,13 +18,14 @@
 // export default Portfolio;
 
 import NavBar from "./components/NavBar";
+import Hero from "./Sections/Hero";
 
 function Portfolio() {
   return (
     <>
       <NavBar />
       <main>
-        {/* sections go here next */}
+        <Hero />
       </main>
     </>
   );
