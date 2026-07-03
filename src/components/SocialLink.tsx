@@ -1,11 +1,11 @@
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Mail } from "lucide-react";
 import type { Social } from "../Data/Socials";
 
 const iconMap: Record<string, React.ElementType> = {
-  github: Github,
-  linkedin: Linkedin,
+  github: Mail,
+  linkedin: Mail,
   mail: Mail,
-  twitter: Twitter,
+  twitter: Mail,
 };
 
 interface SocialLinkProps {
