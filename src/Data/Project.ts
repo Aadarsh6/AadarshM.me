@@ -1,38 +1,35 @@
+export interface ProjectSection {
+  label: string;
+  content: string;
+  image: string;
+}
+
 export interface Project {
   id: string;
   title: string;
-  problem: string;
-  approach: string;
-  result: string;
+  blurb: string; // short one-liner for the card
   tech: string[];
-  image: string;
-  link: string;
+  coverImage: string; // shown on the grid card
+  link?: string;
   github?: string;
+  sections: ProjectSection[]; // Overview, Problem, Approach, Result
 }
 
 export const projects: Project[] = [
   {
     id: "project-1",
     title: "Project One Title",
-    problem: "One or two sentences on the problem you were solving.",
-    approach: "Two to three sentences on what you built and how.",
-    result: "The outcome, metric, or what you learned.",
+    blurb: "One punchy line describing what this project is.",
     tech: ["React", "Node.js", "PostgreSQL"],
-    image: "/src/assets/project1.png",
+    coverImage: "/src/assets/project1-cover.png",
     link: "https://your-live-link.com",
     github: "https://github.com/you/project1",
+    sections: [
+      { label: "Overview", content: "What this project is, in 2 sentences.", image: "/src/assets/project1-1.png" },
+      { label: "Problem", content: "The problem you were solving.", image: "/src/assets/project1-2.png" },
+      { label: "Approach", content: "What you built and how.", image: "/src/assets/project1-3.png" },
+      { label: "Result", content: "Outcome, metric, or what you learned.", image: "/src/assets/project1-4.png" },
+    ],
   },
-  {
-    id: "project-2",
-    title: "Project Two Title",
-    problem: "...",
-    approach: "...",
-    result: "...",
-    tech: ["Next.js", "Tailwind"],
-    image: "/src/assets/project2.png",
-    link: "https://your-live-link.com",
-    github: "https://github.com/you/project1",
-
-  },
-  // add 2-4 total, per our earlier plan — don't overload it
+  // repeat for other projects — reuse the same image across sections if you don't have 4 unique shots yet
 ];
