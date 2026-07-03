@@ -4,7 +4,7 @@ import SocialLink from "../components/SocialLink";
 
 function Contact() {
   return (
-    <section id="contact" className="py-32 px-6 max-w-5xl mx-auto text-center">
+    <section id="contact" className="py-24 md:py-32 px-6 max-w-5xl mx-auto text-center bg-black/[0.015] dark:bg-white/[0.02]">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -20,7 +20,7 @@ function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="mt-4 text-lg text-black/60 dark:text-white/60"
+        className="mt-4 text-lg leading-relaxed text-black/60 dark:text-white/60"
       >
         Open to opportunities and interesting projects. Reach out anytime.
       </motion.p>
@@ -31,7 +31,7 @@ function Contact() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         href="mailto:you@email.com"
-        className="inline-block mt-8 px-8 py-4 rounded-full bg-accent text-white font-medium text-lg hover:opacity-90 transition-opacity"
+        className="inline-block mt-8 px-8 py-4 rounded-full bg-accent text-white font-medium text-lg shadow-[0_8px_24px_-8px_rgba(255,90,31,0.5)] transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_12px_28px_-8px_rgba(255,90,31,0.6)] active:scale-[0.98]"
       >
         Say hello →
       </motion.a>

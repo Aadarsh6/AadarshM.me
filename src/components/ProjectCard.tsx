@@ -12,8 +12,8 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
       layoutId={`card-${project.id}`}
       onClick={onClick}
       whileHover={{ y: -6 }}
-      transition={{ duration: 0.3 }}
-      className="cursor-pointer rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.03]"
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="cursor-pointer rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 bg-white dark:bg-white/[0.03] shadow-[0_2px_20px_-4px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_20px_-4px_rgba(0,0,0,0.4)] hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.5)] transition-shadow duration-300"
     >
       <div className="h-56 overflow-hidden">
         <motion.img
@@ -25,7 +25,7 @@ function ProjectCard({ project, onClick }: ProjectCardProps) {
       </div>
       <div className="p-6">
         <h3 className="font-display text-xl font-bold">{project.title}</h3>
-        <p className="mt-2 text-black/60 dark:text-white/60 text-sm">
+        <p className="mt-2 leading-relaxed text-black/60 dark:text-white/60 text-sm">
           {project.blurb}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
