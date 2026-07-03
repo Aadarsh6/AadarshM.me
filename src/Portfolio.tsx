@@ -1,27 +1,10 @@
-// import { useTheme } from "./Context/ThemeContext";
-
-// function Portfolio() {
-//   const { theme, toggleTheme } = useTheme();
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center">
-//       <button
-//         onClick={toggleTheme}
-//         className="px-4 py-2 rounded-lg border border-accent text-accent"
-//       >
-//         Current: {theme} — Toggle
-//       </button>
-//     </div>  
-//   );
-// }
-
-// export default Portfolio;
-
 import NavBar from "./components/NavBar";
-import About from "./Sections/About";
+import Footer from "./components/Footer";
 import Hero from "./Sections/Hero";
-import Projects from "./Sections/Projects";
+import About from "./Sections/About";
 import Skills from "./Sections/Skills";
+import Projects from "./Sections/Projects";
+import Contact from "./Sections/Contsct";
 
 function Portfolio() {
   return (
@@ -29,10 +12,12 @@ function Portfolio() {
       <NavBar />
       <main>
         <Hero />
-        <About/>
+        <About />
         <Skills />
-        <Projects/>
+        <Projects />
+        <Contact />
       </main>
+      <Footer />
     </>
   );
 }
