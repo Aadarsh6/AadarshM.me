@@ -19,6 +19,7 @@
 
 import NavBar from "./components/NavBar";
 import Hero from "./Sections/Hero";
+import Skills from "./Sections/Skills";
 
 function Portfolio() {
   return (
@@ -26,6 +27,7 @@ function Portfolio() {
       <NavBar />
       <main>
         <Hero />
+        <Skills />
       </main>
     </>
   );
