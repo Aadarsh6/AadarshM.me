@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { projects } from "../Data/Project";
-import StickyScroll from "../components/ui/sticky-scroll-reveal";
+import StickyScroll from "../components/Ui/Sticky-scroll";
 
 function Projects() {
   return (

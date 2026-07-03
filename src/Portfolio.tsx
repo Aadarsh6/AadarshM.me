@@ -20,6 +20,7 @@
 import NavBar from "./components/NavBar";
 import About from "./Sections/About";
 import Hero from "./Sections/Hero";
+import Projects from "./Sections/Projects";
 import Skills from "./Sections/Skills";
 
 function Portfolio() {
@@ -30,6 +31,7 @@ function Portfolio() {
         <Hero />
         <About/>
         <Skills />
+        <Projects/>
       </main>
     </>
   );

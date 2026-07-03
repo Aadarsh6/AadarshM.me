@@ -16,3 +16,11 @@
 body {
   @apply bg-white dark:bg-[#0a0a0a] text-black dark:text-white transition-colors duration-300;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
