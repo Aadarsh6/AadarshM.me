@@ -1,8 +1,13 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "../Data/Project";
-import StickyScroll from "../components/Ui/Sticky-scroll";
+import ProjectCard from "../components/ProjectCard";
+import ProjectDetail from "../components/ProjectDetail";
+import type { Project } from "../Data/Project";
 
 function Projects() {
+  const [selected, setSelected] = useState<Project | null>(null);
+
   return (
     <section id="projects" className="py-24 px-6 max-w-6xl mx-auto">
       <motion.h2
@@ -15,7 +20,21 @@ function Projects() {
         Selected work
       </motion.h2>
 
-      <StickyScroll projects={projects} />
+      <div className="grid md:grid-cols-2 gap-8">
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            onClick={() => setSelected(project)}
+          />
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {selected && (
+          <ProjectDetail project={selected} onClose={() => setSelected(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
