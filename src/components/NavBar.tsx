@@ -44,7 +44,7 @@ useEffect(() => {
         visible ? "translate-y-0" : "-translate-y-full"
       )}
     >
-      <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <a href="#hero" className="font-display font-bold text-lg">
           YourName
         </a>

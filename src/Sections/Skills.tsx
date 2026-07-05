@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { skills } from "../Data/Skils"; 
 import SkillMarquee from "../components/SkillMarquee";
+import Container from "../components/Ui/Container";
 
 function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+    <section id="skills" className="py-24 md:py-32">
+      <Container>
       {/* Restored Standard Header Orientation */}
       <motion.p
         initial={{ opacity: 0, y: 16 }}
@@ -71,6 +73,7 @@ function Skills() {
           </motion.div>
         ))}
       </div>
+      </Container>
     </section>
   );
 }

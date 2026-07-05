@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Code2, Coffee, MapPin, Sparkles } from "lucide-react";
+import Container from "../components/Ui/Container";
 
 const highlights = [
   { icon: Code2, label: "2+ years", sub: "building products" },
@@ -10,13 +11,14 @@ const highlights = [
 
 function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+    <section id="about" className="py-24 md:py-32">
+      <Container>
       <motion.p
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5 }}
-        className="mb-4 text-sm uppercase tracking-[0.3em] text-accent"
+        className="mb-4 text-sm font-mono uppercase tracking-[0.3em] text-accent"
       >
         About
       </motion.p>
@@ -71,6 +73,7 @@ function About() {
           ))}
         </motion.div>
       </div>
+      </Container>
     </section>
   );
 }

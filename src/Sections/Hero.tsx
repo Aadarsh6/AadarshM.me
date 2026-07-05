@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import GradientBlob from "../components/Ui/GradientBlob";
+import Container from "../components/Ui/Container";
 
 function Hero() {
   return (
     <section id="hero" className="relative min-h-screen overflow-hidden">
       <GradientBlob />
 
-      <div className="relative z-10 flex flex-col justify-center min-h-screen px-6 max-w-5xl mx-auto">
+      <Container className="relative z-10 flex min-h-screen flex-col justify-center">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -53,7 +54,7 @@ function Hero() {
             Get in touch
           </a>
         </motion.div>
-      </div>
+      </Container>
 
       <motion.div
         initial={{ opacity: 0 }}

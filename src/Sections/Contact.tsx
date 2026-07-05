@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { socials } from "../Data/Socials";
 import SocialLink from "../components/SocialLink";
+import Container from "../components/Ui/Container";
 
 function Contact() {
   return (
@@ -8,14 +9,14 @@ function Contact() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/[0.02] to-black/[0.03] dark:via-white/[0.02] dark:to-white/[0.03]" />
       <div className="absolute left-1/2 top-10 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
 
-      <div className="relative mx-auto max-w-6xl px-6">
+      <Container className="relative">
         <div className="rounded-[2rem] border border-black/10 bg-white/70 px-6 py-14 text-center shadow-[0_24px_80px_-40px_rgba(0,0,0,0.35)] backdrop-blur-md dark:border-white/10 dark:bg-white/[0.03] md:px-12 md:py-20">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
-            className="mb-4 text-sm uppercase tracking-[0.3em] text-accent"
+            className="mb-4 text-sm font-mono uppercase tracking-[0.3em] text-accent"
           >
             Contact
           </motion.p>
@@ -68,14 +69,14 @@ function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.35 }}
-            className="mt-10 flex w-1/3 items-center justify-center gap-4 rounded-2xl border border-black/10 bg-black/[0.02]  py-4 dark:border-white/10 dark:bg-white/[0.03]"
+            className="mx-auto mt-10 flex w-full max-w-xs flex-wrap items-center justify-center gap-4 rounded-2xl border border-black/10 bg-black/[0.02] px-4 py-4 dark:border-white/10 dark:bg-white/[0.03] sm:max-w-sm"
           >
             {socials.map((social) => (
               <SocialLink key={social.label} social={social} />
             ))}
           </motion.div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
