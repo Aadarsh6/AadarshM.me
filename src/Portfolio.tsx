@@ -14,9 +14,9 @@ function Portfolio() {
       <main>
         <CustomCursor/>
         <Hero />
-        <About />
-        <Skills />
         <Projects />
+        <Skills />
+        <About />
         <Contact />
       </main>
       <Footer />

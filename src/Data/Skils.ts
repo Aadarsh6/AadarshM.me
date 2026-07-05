@@ -6,14 +6,14 @@ category: string;
 export const skills: Skill[] = [
   {
     category: "Building interfaces",
-    items: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    items: ["React", "Next js", "Javascript", "TypeScript", "Tailwind CSS", "Framer Motion"],
   },
   {
     category: "Backend & data",
-    items: ["Node.js", "Express", "PostgreSQL", "MongoDB"],
+    items: ["Node.js", "Express", "PostgreSQL", "MongoDB", "WebRTC", "GraphQL"],
   },
   {
     category: "Tools I reach for",
-    items: ["Git", "Figma", "Vite", "Vercel"],
+    items: ["Git", "Figma", "Docker", "Vercel", "Postman"],
   },
 ];

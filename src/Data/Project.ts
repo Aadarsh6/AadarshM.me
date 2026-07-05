@@ -7,12 +7,12 @@ export interface ProjectSection {
 export interface Project {
   id: string;
   title: string;
-  blurb: string; // short one-liner for the card
+  blurb: string;
   tech: string[];
-  coverImage: string; // shown on the grid card
+  coverImage: string;
   link?: string;
   github?: string;
-  sections: ProjectSection[]; // Overview, Problem, Approach, Result
+  sections: ProjectSection[];
 }
 
 export const projects: Project[] = [
@@ -31,5 +31,30 @@ export const projects: Project[] = [
       { label: "Result", content: "Outcome, metric, or what you learned.", image: "/src/assets/project1-4.png" },
     ],
   },
-  // repeat for other projects — reuse the same image across sections if you don't have 4 unique shots yet
+  {
+    id: "project-2",
+    title: "Project Two Title",
+    blurb: "One punchy line describing what this project is.",
+    tech: ["Next.js", "Tailwind", "MongoDB"],
+    coverImage: "/src/assets/project2-cover.png",
+    sections: [
+      { label: "Overview", content: "What this project is, in 2 sentences.", image: "/src/assets/project2-1.png" },
+      { label: "Problem", content: "The problem you were solving.", image: "/src/assets/project2-2.png" },
+      { label: "Approach", content: "What you built and how.", image: "/src/assets/project2-3.png" },
+      { label: "Result", content: "Outcome, metric, or what you learned.", image: "/src/assets/project2-4.png" },
+    ],
+  },
+  {
+    id: "project-3",
+    title: "Project Three Title",
+    blurb: "One punchy line describing what this project is.",
+    tech: ["TypeScript", "Express", "Redis"],
+    coverImage: "/src/assets/project3-cover.png",
+    sections: [
+      { label: "Overview", content: "What this project is, in 2 sentences.", image: "/src/assets/project3-1.png" },
+      { label: "Problem", content: "The problem you were solving.", image: "/src/assets/project3-2.png" },
+      { label: "Approach", content: "What you built and how.", image: "/src/assets/project3-3.png" },
+      { label: "Result", content: "Outcome, metric, or what you learned.", image: "/src/assets/project3-4.png" },
+    ],
+  },
 ];
