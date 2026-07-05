@@ -10,12 +10,6 @@ interface SectionHeadingProps {
   className?: string;
 }
 
-/**
- * Single source of truth for the "eyebrow + title (+ description)"
- * pattern used at the top of every section. Keeps typography,
- * spacing, and animation identical across About / Skills / Projects /
- * Contact instead of each one hand-rolling its own variant.
- */
 function SectionHeading({
   eyebrow,
   title,
