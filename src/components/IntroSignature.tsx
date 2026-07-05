@@ -48,39 +48,34 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
             className="w-[min(72vw,420px)]"
           >
             <svg
-              viewBox={SIGNATURE_VIEWBOX}
-              className="h-auto w-full text-accent"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                {/* Mask reveals the signature along its natural upward slant,
-                    like a pen moving left to right across the page. */}
-                <mask id="signature-wipe-mask">
-                  <motion.rect
-                    x="-200"
-                    y="-400"
-                    width="450"
-                    height="1600"
-                    fill="white"
-                    initial={{ x: -650 }}
-                    animate={{ x: 900 }}
-                    transition={{
-                      duration: REVEAL_DURATION,
-                      ease: [0.65, 0, 0.35, 1],
-                    }}
-                    transform="rotate(-20 465 403)"
-                  />
-                </mask>
-              </defs>
-              <g
-                transform="translate(0,807) scale(0.1,-0.1)"
-                fill="currentColor"
-                stroke="none"
-                mask="url(#signature-wipe-mask)"
-              >
-                <path d={SIGNATURE_PATH_D} />
-              </g>
-            </svg>
+  viewBox={SIGNATURE_VIEWBOX}
+  className="h-auto w-full text-accent"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g transform="translate(0,807) scale(0.1,-0.1)">
+    {/* Draws the outline like a pen tracing the strokes */}
+    <motion.path
+      d={SIGNATURE_PATH_D}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={18}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      initial={{ pathLength: 0 }}
+      animate={{ pathLength: 1 }}
+      transition={{ duration: REVEAL_DURATION, ease: "easeInOut" }}
+    />
+    {/* Fills in solid once the trace is basically done */}
+    <motion.path
+      d={SIGNATURE_PATH_D}
+      fill="currentColor"
+      stroke="none"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3, delay: REVEAL_DURATION * 0.85 }}
+    />
+  </g>
+</svg>
           </motion.div>
         </motion.div>
       )}
