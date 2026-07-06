@@ -4,59 +4,61 @@ import Container from "../components/Ui/Container";
 
 function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden">
+    <section
+      id="hero"
+      className="relative flex h-screen items-center overflow-hidden"
+    >
       <GradientBlob />
 
-      <Container className="relative z-10 flex min-h-screen flex-col justify-center">
+      <Container className="relative z-10">
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-accent font-medium mb-4 tracking-wide text-sm md:text-base"
+          className="mb-6 text-sm tracking-wide text-black/50 dark:text-white/50"
         >
-          Hi, I'm YourName 👋
+          Aadarsh Mishra — Product Designer & Developer
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display text-5xl md:text-7xl font-bold leading-[1.1] max-w-3xl"
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl font-display text-5xl font-bold leading-[1.08] tracking-tight md:text-7xl"
         >
           Your bold positioning statement goes here.
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-6 text-lg leading-relaxed text-black/60 dark:text-white/60 max-w-xl"
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="mt-6 max-w-lg text-lg leading-relaxed text-black/60 dark:text-white/60"
         >
           A one-to-two line subline explaining what you do, for who, and why it matters.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 flex gap-4"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-10 flex items-center gap-8"
         >
           <a
             href="#projects"
-            className="px-6 py-3.5 rounded-full bg-accent text-white font-medium shadow-[0_8px_24px_-8px_rgba(255,90,31,0.5)] transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_12px_28px_-8px_rgba(255,90,31,0.6)] active:scale-[0.98]"
+            className="rounded-full bg-accent px-7 py-3.5 font-medium text-white shadow-[0_8px_24px_-8px_rgba(255,90,31,0.5)] transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_12px_28px_-8px_rgba(255,90,31,0.6)] active:scale-[0.98]"
           >
             View my work
           </a>
           <a
             href="#contact"
-            className="px-6 py-3.5 rounded-full border border-black/10 dark:border-white/20 font-medium transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:scale-[1.02] active:scale-[0.98]"
+            className="group inline-flex items-center gap-2 font-medium text-black/70 dark:text-white/70"
           >
             Get in touch
+            <span className="h-px w-6 bg-current transition-all duration-300 group-hover:w-9" />
           </a>
         </motion.div>
       </Container>
-
-
     </section>
   );
 }
