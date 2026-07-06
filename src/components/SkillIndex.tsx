@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, createElement } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
   SiReact, SiTypescript, SiJavascript, SiTailwindcss, SiNextdotjs,
@@ -152,9 +152,10 @@ function SkillIndex({ groups }: SkillIndexProps) {
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="relative flex items-end gap-4"
               >
-                {ActiveIcon && (
-                  <ActiveIcon className="mb-1 h-8 w-8 shrink-0 text-secondary" />
-                )}
+                {ActiveIcon &&
+  createElement(ActiveIcon, {
+    className: "mb-1 h-8 w-8 shrink-0 text-secondary",
+  })}
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-secondary">
                     {active?.category}
@@ -199,13 +200,15 @@ function SkillIndex({ groups }: SkillIndexProps) {
                   <span className="w-6 shrink-0 font-mono text-xs text-text-light/30 dark:text-text-dark/30">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  {Icon ? (
-                    <Icon
-                      className={`h-4 w-4 shrink-0 transition-colors duration-200 ${
-                        isActive ? "text-secondary" : "text-text-light/30 dark:text-text-dark/30"
-                      }`}
-                    />
-                  ) : (
+                {Icon ? (
+  createElement(Icon, {
+    className: `h-4 w-4 shrink-0 transition-colors duration-200 ${
+      isActive
+        ? "text-secondary"
+        : "text-text-light/30 dark:text-text-dark/30"
+    }`,
+  })
+) : (
                     <span
                       className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold transition-colors duration-200 ${
                         isActive
