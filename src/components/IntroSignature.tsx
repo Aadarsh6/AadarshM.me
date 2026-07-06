@@ -1,28 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SIGNATURE_PATH_D, SIGNATURE_VIEWBOX } from "../Data/SignaturePath";
+import { useTheme } from "@/Context/ThemeContext";
 
-const REVEAL_DURATION = 1.3; // seconds for the stroke to trace itself
-const FILL_DELAY_RATIO = 0.88; // fill kicks in just before the stroke finishes
-const HOLD_DURATION = 450; // ms to hold the finished signature before fading
-const FADE_DURATION = 0.7; // seconds for the natural (auto) exit wipe
-const SKIP_EXIT_DURATION = 0.35; // seconds for the exit wipe when the user skips
-const SKIP_HINT_DELAY = 0.8; // seconds before the "skip" hint fades in
+const REVEAL_DURATION = 1.3;
+const FILL_DELAY_RATIO = 0.88;
+const HOLD_DURATION = 450;
+const FADE_DURATION = 0.7;
+const SKIP_EXIT_DURATION = 0.35;
+const SKIP_HINT_DELAY = 0.8;
 
 interface IntroSignatureProps {
   onFinish?: () => void;
 }
 
-// Slow, deliberate start (pen touching down), accelerating through the
-// midstroke, easing out at the end.
 const INK_EASE: [number, number, number, number] = [0.22, 0.68, 0.32, 0.98];
-// Crisp "expo" easing for the wipe-reveal exit — a curtain pulled away.
 const WIPE_EASE: [number, number, number, number] = [0.76, 0, 0.24, 1];
 
 function IntroSignature({ onFinish }: IntroSignatureProps) {
   const [visible, setVisible] = useState(true);
   const [skipped, setSkipped] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
@@ -33,8 +33,6 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
     return () => clearTimeout(holdTimerRef.current);
   }, [prefersReducedMotion]);
 
-  // Let people skip on click or any keypress — it plays on every refresh,
-  // so returning visitors shouldn't be stuck waiting on it.
   useEffect(() => {
     if (!visible) return;
     const skipIntro = () => {
@@ -63,21 +61,17 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
           initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
           exit={{ clipPath: "inset(0% 0% 0% 100%)" }}
           transition={{ duration: exitDuration, ease: WIPE_EASE }}
-          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-bg-lite dark:bg-bg-dark"
+          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-bg-light dark:bg-bg-dark"
           aria-hidden="true"
         >
-          {/* Vignette in the brand's secondary tone — ties the intro to the
-              same palette as the rest of the site, in both modes. */}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--color-secondary) 14%, transparent), transparent 60%)",
+                "radial-gradient(circle at 50% 50%, var(--intro-glow), transparent 60%)",
             }}
           />
 
-          {/* Same grain used across the site, so the intro doesn't feel like
-              a flatter, separate surface from the page underneath. */}
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.025]"
             style={{
@@ -103,13 +97,18 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
                   <stop offset="100%" stopColor="currentColor" stopOpacity="1" />
                 </linearGradient>
 
-                <filter id="signature-glow" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="5" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
+                {/* Only rendered/used in dark mode — glows don't read well
+                    against a light background, so we skip it entirely
+                    there rather than showing a weak, pointless blur. */}
+                {isDark && (
+                  <filter id="signature-glow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="5" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                )}
               </defs>
 
               <g transform="translate(0,807) scale(0.1,-0.1)">
@@ -124,7 +123,7 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
                       strokeWidth={16}
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      filter="url(#signature-glow)"
+                      filter={isDark ? "url(#signature-glow)" : undefined}
                       initial={{ pathLength: 0, opacity: 0.9 }}
                       animate={{ pathLength: 1, opacity: [0.9, 1, 0] }}
                       transition={{
@@ -153,8 +152,6 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
               </g>
             </svg>
 
-            {/* A soft bloom right as the ink settles — like wet ink catching
-                the light for a moment before it dries. */}
             {!prefersReducedMotion && (
               <motion.div
                 className="pointer-events-none absolute inset-0"
@@ -167,13 +164,11 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
                 }}
                 style={{
                   background:
-                    "radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--color-secondary) 22%, transparent), transparent 70%)",
+                    "radial-gradient(circle at 50% 50%, var(--intro-glow), transparent 70%)",
                 }}
               />
             )}
 
-            {/* Baseline + printed name — reads like a signed document
-                rather than just a logo animating on screen. */}
             <motion.div
               className="mt-3 h-px w-3/5 origin-center bg-secondary/25"
               initial={prefersReducedMotion ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
@@ -198,8 +193,6 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
             </motion.p>
           </motion.div>
 
-          {/* Subtle, unobtrusive way out for anyone who doesn't want to
-              wait through the full animation. */}
           {!prefersReducedMotion && (
             <motion.span
               className="absolute bottom-6 right-6 text-[10px] uppercase tracking-[0.25em] text-text-light/30 dark:text-text-dark/30"
@@ -207,8 +200,7 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: SKIP_HINT_DELAY }}
             >
-              Skip → <br />
-              Press any key
+              Skip →
             </motion.span>
           )}
         </motion.div>
