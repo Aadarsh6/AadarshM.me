@@ -7,7 +7,7 @@
   --font-body: "Satoshi", sans-serif;
 
   --color-accent: #FF5A1F;
-  --color-secondary: #1B3A5C;   /* ink blue — light mode default */
+  --color-secondary: #1B3A5C;   
   --color-bg-light: #FAFAF8;
   --color-bg-dark: #0D0D0F;
   --color-text-light: #16161A;
@@ -32,7 +32,7 @@ body {
 }
 
 .dark {
-  --color-secondary: #4A6FA5;   /* ink blue — lighter/softer for contrast on black */
+  --color-secondary: #4A6FA5;   
 }
 
 body::before {

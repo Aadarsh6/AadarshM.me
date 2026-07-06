@@ -63,7 +63,7 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
           initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
           exit={{ clipPath: "inset(0% 0% 0% 100%)" }}
           transition={{ duration: exitDuration, ease: WIPE_EASE }}
-          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-bg-light dark:bg-bg-dark"
+          className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center overflow-hidden bg-bg-lite dark:bg-bg-dark"
           aria-hidden="true"
         >
           {/* Vignette in the brand's secondary tone — ties the intro to the

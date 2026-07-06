@@ -7,7 +7,7 @@ function Skills() {
   return (
     <section id="skills" className="py-24 md:py-32">
       <Container>
-      {/* Restored Standard Header Orientation */}
+
       <motion.p
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -15,7 +15,6 @@ function Skills() {
         transition={{ duration: 0.5 }}
         className="mb-4 font-mono text-sm uppercase tracking-[0.3em] text-black/40 dark:text-white/40"
       >
-        // 03. The Arsenal
       </motion.p>
 
       <motion.h2
@@ -49,7 +48,7 @@ function Skills() {
             transition={{ duration: 0.5, delay: i * 0.1 }}
             className="group grid items-center gap-6 border-b border-black/5 pb-12 last:border-0 md:grid-cols-[220px_1fr] md:gap-10 md:pb-16 dark:border-white/5"
           >
-            {/* Left side: Monospace Data Label */}
+
             <div className="flex items-center justify-between md:block">
               <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-neutral-900 dark:text-neutral-100">
                 {group.category}
@@ -59,10 +58,9 @@ function Skills() {
               </p>
             </div>
 
-            {/* Right side: Contained Marquee with Crisp Light-Mode Styling */}
-            <div className="relative overflow-hidden rounded-2xl border border-black/[0.08] bg-black/[0.02] py-8 dark:border-white/[0.08] dark:bg-white/[0.02]">
-              {/* Fade masks mapped to the container's background for smooth clipping */}
-              <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-white via-transparent to-white dark:from-[#0a0a0a] dark:to-[#0a0a0a] [mask-image:linear-gradient(to_right,white_5%,transparent_20%,transparent_80%,white_95%)]" />
+            <div className="relative overflow-hidden rounded-2xl py-8 ">
+
+              <div className="absolute inset-0 z-10 pointer-events-none from-white via-transparent to-white dark:from-[#0a0a0a] dark:to-[#0a0a0a] [mask-image:linear-gradient(to_right,white_5%,transparent_20%,transparent_80%,white_95%)]" />
               
               <SkillMarquee
                 items={group.items}
