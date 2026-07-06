@@ -207,7 +207,8 @@ function IntroSignature({ onFinish }: IntroSignatureProps) {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: SKIP_HINT_DELAY }}
             >
-              Skip →
+              Skip → <br />
+              Press any key
             </motion.span>
           )}
         </motion.div>
