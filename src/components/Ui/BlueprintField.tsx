@@ -43,7 +43,7 @@ function BlueprintField() {
       {/* Brighter layer, only shown where the cursor is */}
       {!prefersReducedMotion && (
         <motion.div
-          className="absolute inset-0 opacity-[0.55] dark:opacity-[2]"
+          className="absolute inset-0 opacity-[0.55] dark:opacity-[0.6]"
           style={{ ...gridStyle, WebkitMaskImage: maskImage, maskImage }}
         />
       )}
