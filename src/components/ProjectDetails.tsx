@@ -28,8 +28,8 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
       },
       {
         root: container,
-        threshold: 0.5, // section counts as "active" once 50% visible
-        rootMargin: "-20% 0px -20% 0px", // biases toward the middle of the viewport
+        threshold: 0.5,
+        rootMargin: "-20% 0px -20% 0px",
       }
     );
 
@@ -46,27 +46,36 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] bg-white dark:bg-[#0a0a0a] overflow-hidden"
+        className="fixed inset-0 z-[100] overflow-hidden bg-bg-light dark:bg-bg-dark"
       >
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-10 p-3 rounded-full border border-black/10 dark:border-white/15 hover:border-accent hover:text-accent transition-colors"
+          className="absolute right-6 top-6 z-10 rounded-full border border-black/10 p-3 transition-colors hover:border-secondary hover:text-secondary dark:border-white/15"
         >
           <X size={20} />
         </button>
 
         <div
           ref={scrollRef}
-          className="no-scrollbar h-full overflow-y-auto flex flex-col lg:flex-row gap-10 px-6 lg:px-16 py-20 max-w-6xl mx-auto"
+          className="no-scrollbar mx-auto flex h-full max-w-6xl flex-col gap-10 overflow-y-auto px-6 py-20 lg:flex-row lg:px-16"
         >
           <div className="lg:w-1/2">
-            <h2 className="font-display text-3xl md:text-5xl font-bold mb-2">
+            {/* Eyebrow tying the modal into the same "spec sheet" language
+                as the rest of the site instead of jumping straight to title */}
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-secondary">
+              Case study
+            </p>
+
+            <h2 className="mb-2 font-display text-3xl font-bold text-text-light md:text-5xl dark:text-text-dark">
               {project.title}
             </h2>
 
-            <div className="flex flex-wrap gap-2 mt-4 mb-16">
+            <div className="mb-16 mt-4 flex flex-wrap gap-2">
               {project.tech.map((t) => (
-                <span key={t} className="px-3 py-1 rounded-full text-xs border border-black/10 dark:border-white/15">
+                <span
+                  key={t}
+                  className="rounded-full border border-black/10 px-3 py-1 text-xs text-text-light/70 dark:border-white/15 dark:text-text-dark/70"
+                >
                   {t}
                 </span>
               ))}
@@ -75,41 +84,56 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             {project.sections.map((section, i) => (
               <div
                 key={section.label}
-                ref={(el) => { sectionRefs.current[i] = el; }}
-                className="mb-24 last:mb-10 min-h-[40vh]"
+                ref={(el) => {
+                  sectionRefs.current[i] = el;
+                }}
+                className="mb-24 min-h-[40vh] last:mb-10"
               >
                 <motion.p
                   animate={{ opacity: active === i ? 1 : 0.3 }}
                   transition={{ duration: 0.3 }}
-                  className="text-sm font-medium text-accent mb-2"
+                  className="mb-2 flex items-center gap-2 text-sm font-medium text-secondary"
                 >
+                  <span className="font-mono text-xs text-secondary/60">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   {section.label}
                 </motion.p>
                 <motion.p
                   animate={{ opacity: active === i ? 1 : 0.3 }}
                   transition={{ duration: 0.3 }}
-                  className="text-lg text-black/70 dark:text-white/70 leading-relaxed"
+                  className="text-lg leading-relaxed text-text-light/70 dark:text-text-dark/70"
                 >
                   {section.content}
                 </motion.p>
               </div>
             ))}
 
-            <div className="flex gap-4 mt-10">
+            <div className="mt-10 flex gap-6">
               {project.link && (
-                <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-accent hover:underline">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-opacity hover:opacity-80"
+                >
                   View live →
                 </a>
               )}
               {project.github && (
-                <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-sm font-medium hover:underline">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-text-light/70 transition-colors hover:text-secondary dark:text-text-dark/70"
+                >
                   GitHub →
                 </a>
               )}
             </div>
           </div>
 
-          <div className="lg:w-1/2 lg:sticky lg:top-20 h-72 lg:h-[28rem] rounded-2xl overflow-hidden bg-black/[0.03] dark:bg-white/[0.03] border border-black/10 dark:border-white/10">
+          <div className="h-72 overflow-hidden rounded-2xl border border-black/10 bg-black/[0.03] lg:sticky lg:top-20 lg:h-[28rem] lg:w-1/2 dark:border-white/10 dark:bg-white/[0.03]">
             <motion.img
               key={active}
               src={project.sections[active].image}
@@ -117,7 +141,7 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
               initial={{ opacity: 0, scale: 1.02 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
         </div>
