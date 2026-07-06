@@ -6,7 +6,7 @@
   --font-display: "ClashDisplay", sans-serif;
   --font-body: "Satoshi", sans-serif;
 
-  --color-accent: #FF5A1F;
+  --color-accent: #008264;
   --color-secondary: #24476E;   /* ink blue — light mode */
   --color-bg-light: #F3F1EC;    /* warm muted off-white, not stark white */
   --color-bg-dark: #0D0D0F;
@@ -57,8 +57,7 @@ body::before {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-@media (min-width: 768px) {
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
   body { cursor: none; }
 }
 

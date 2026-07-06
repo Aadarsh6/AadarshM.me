@@ -65,7 +65,7 @@ function Hero() {
         >
           <MagneticButton
             href="#projects"
-            className="inline-block rounded-full bg-accent px-7 py-3.5 font-medium text-white shadow-[0_8px_24px_-8px_rgba(255,90,31,0.5)] transition-shadow duration-300 ease-out hover:shadow-[0_12px_28px_-8px_rgba(255,90,31,0.6)]"
+            className="inline-block rounded-full bg-accent px-7 py-3.5 font-medium text-white  duration-300 ease-out hover:shadow-[0_12px_28px_-8px_rgba(255,90,31,0.6)]"
           >
             View my work
           </MagneticButton>
