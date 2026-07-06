@@ -18,7 +18,7 @@ function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
-            className="mb-4 font-mono text-sm uppercase tracking-[0.3em] text-secondary"
+            className="mb-4 font-mono text-md font-bold uppercase tracking-[0.3em] text-secondary"
           >
             About
           </motion.p>
@@ -41,7 +41,7 @@ function About() {
             className="mt-8 max-w-3xl text-base leading-[1.85] text-text-light/70 dark:text-text-dark/70 md:text-lg"
           >
             <p>
-              I&apos;m Aadarsh Mishra, a frontend developer from Delhi focused on building modern
+              I&apos;m Aadarsh Mishra, a Fullstack and ML Developer from Delhi focused on building modern
               portfolio websites, product pages, and UI systems with a strong sense of structure
               and detail.
             </p>
