@@ -1,7 +1,7 @@
 export interface Social {
   label: string;
   href: string;
-  icon: string; // we'll map this to an icon component in SocialLink.tsx
+  icon: string;
 }
 
 export const socials: Social[] = [

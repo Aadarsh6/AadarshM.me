@@ -26,7 +26,7 @@ function CopyableEmail({ email }: CopyableEmailProps) {
       <MagneticButton
         href={`mailto:${email}`}
         strength={10}
-        className="group inline-flex items-center gap-3 font-display text-2xl font-bold tracking-tight text-text-light transition-colors duration-300 hover:text-secondary dark:text-text-dark sm:text-4xl md:text-5xl"
+        className="group inline-flex items-center gap-3 font-display text-2xl font-bold tracking-tight text-text-light transition-colors duration-300 hover:text-accent dark:text-text-dark sm:text-4xl md:text-5xl"
       >
         <span
           onClick={(e) => {
@@ -48,7 +48,7 @@ function CopyableEmail({ email }: CopyableEmailProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.2 }}
-            className="absolute -bottom-7 font-mono text-xs uppercase tracking-[0.2em] text-secondary"
+            className="absolute -bottom-7 font-mono text-xs uppercase tracking-[0.2em] text-accent"
             aria-live="polite"
           >
             Copied to clipboard
