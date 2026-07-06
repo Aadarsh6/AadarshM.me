@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { skills } from "../Data/Skils";
-import SkillMarqueeRows from "../components/SkillMarqueeRows";
+import SkillIndex from "../components/SkillIndex";
 import Container from "../components/Ui/Container";
 
 function Skills() {
@@ -37,8 +37,7 @@ function Skills() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-6 max-w-xl text-base leading-relaxed text-text-light/60 dark:text-text-dark/60"
         >
-          Tools change, but fundamentals remain. Hover a line to pause it and
-          read closer.
+          Cataloged, not ranked. Hover any tool to bring it into focus.
         </motion.p>
 
         <motion.div
@@ -48,7 +47,7 @@ function Skills() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-16"
         >
-          <SkillMarqueeRows groups={skills} />
+          <SkillIndex groups={skills} />
         </motion.div>
       </Container>
     </section>
