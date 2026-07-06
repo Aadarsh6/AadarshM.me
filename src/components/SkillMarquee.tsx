@@ -27,7 +27,7 @@ function SkillMarquee({ items, direction = "left", speed = 25 }: SkillMarqueePro
         {duplicated.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="shrink-0 rounded-full border border-accent/20 bg-white/80 px-4 py-2 text-sm font-medium text-black/80 shadow-[0_8px_24px_-18px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-accent/10 hover:text-accent dark:bg-white/5 dark:text-white/85"
+            className="shrink-0 rounded-full border border-secondary/20 bg-bg-light px-4 py-2 text-sm font-medium text-text-light/80 shadow-[0_8px_24px_-18px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:border-secondary/60 hover:bg-secondary/10 hover:text-secondary dark:bg-white/5 dark:text-text-dark/85"
           >
             {item}
           </span>
