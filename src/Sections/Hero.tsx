@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-// import GradientBlob from "../components/Ui/GradientBlob";
+import GradientBlob from "../components/Ui/GradientBlob";
 import Container from "../components/Ui/Container";
 
 function Hero() {
   return (
     <section id="hero" className="relative min-h-screen overflow-hidden">
-      {/* <GradientBlob /> */}
+      <GradientBlob />
 
       <Container className="relative z-10 flex min-h-screen flex-col justify-center">
         <motion.p
