@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { skills } from "../Data/Skils";
-import SkillIndex from "../components/SkillIndex";
+import SkillMarqueeRows from "../components/SkillMarqueeRows";
 import Container from "../components/Ui/Container";
 
 function Skills() {
@@ -37,8 +37,8 @@ function Skills() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-6 max-w-xl text-base leading-relaxed text-text-light/60 dark:text-text-dark/60"
         >
-          Tools change, but fundamentals remain. Hover or tap anything on
-          the right to bring it into focus.
+          Tools change, but fundamentals remain. Hover a line to pause it and
+          read closer.
         </motion.p>
 
         <motion.div
@@ -48,7 +48,7 @@ function Skills() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mt-16"
         >
-          <SkillIndex groups={skills} />
+          <SkillMarqueeRows groups={skills} />
         </motion.div>
       </Container>
     </section>
