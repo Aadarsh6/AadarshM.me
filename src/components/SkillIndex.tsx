@@ -75,49 +75,20 @@ function SkillIndex({ groups }: SkillIndexProps) {
     [groups]
   );
 
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const filtered = useMemo(
-    () => (activeCategory ? flat.filter((s) => s.category === activeCategory) : flat),
-    [flat, activeCategory]
-  );
-
-  const active = filtered[Math.min(activeIndex, filtered.length - 1)] ?? flat[0];
+  const active = flat[Math.min(activeIndex, flat.length - 1)] ?? flat[0];
   const ActiveIcon = active ? getIcon(active.name) : null;
-
-  const categories = groups.map((g) => g.category);
-
-  const selectByFilter = (cat: string | null) => {
-    setActiveCategory(cat);
-    setActiveIndex(0);
-  };
 
   return (
     <div>
-      <div className="mb-10 flex flex-wrap gap-x-6 gap-y-3 border-b border-black/10 pb-4 dark:border-white/10">
-        <FilterChip
-          label="All"
-          active={activeCategory === null}
-          onClick={() => selectByFilter(null)}
-        />
-        {categories.map((cat) => (
-          <FilterChip
-            key={cat}
-            label={cat}
-            active={activeCategory === cat}
-            onClick={() => selectByFilter(cat)}
-          />
-        ))}
-      </div>
-
       <div
         className="flex flex-col"
         onMouseLeave={() => {
           /* keep last hovered item active on mouse leave */
         }}
       >
-        {filtered.map((skill, i) => {
+        {flat.map((skill, i) => {
           const isActive = skill.name === active?.name;
           const Icon = getIcon(skill.name);
 
@@ -173,46 +144,14 @@ function SkillIndex({ groups }: SkillIndexProps) {
                 </span>
               </span>
 
-              {!activeCategory && (
-                <span className="relative hidden font-mono text-xs uppercase tracking-wide text-text-light/30 dark:text-text-dark/30 md:block">
-                  {skill.category}
-                </span>
-              )}
+              <span className="relative hidden font-mono text-xs uppercase tracking-wide text-text-light/30 dark:text-text-dark/30 md:block">
+                {skill.category}
+              </span>
             </button>
           );
         })}
       </div>
     </div>
-  );
-}
-
-function FilterChip({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`relative pb-2 text-sm font-medium transition-colors duration-200 ${
-        active
-          ? "text-secondary"
-          : "text-text-light/50 hover:text-text-light/80 dark:text-text-dark/50 dark:hover:text-text-dark/80"
-      }`}
-    >
-      {label}
-      {active && (
-        <motion.div
-          layoutId="filter-underline"
-          transition={{ type: "spring", stiffness: 500, damping: 40 }}
-          className="absolute -bottom-[17px] left-0 right-0 h-[2px] bg-secondary"
-        />
-      )}
-    </button>
   );
 }
 
