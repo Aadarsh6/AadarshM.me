@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { skills } from "../Data/Skils";
-import SkillMarquee from "../components/SkillMarquee";
+import SkillIndex from "../components/SkillIndex";
 import Container from "../components/Ui/Container";
 
 function Skills() {
@@ -37,42 +37,19 @@ function Skills() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-6 max-w-xl text-base leading-relaxed text-text-light/60 dark:text-text-dark/60"
         >
-          Tools change, but fundamentals remain. I use a focused stack to
-          build fast, scalable, and resilient interfaces without the bloat.
+          Tools change, but fundamentals remain. Hover or tap anything on
+          the right to bring it into focus.
         </motion.p>
 
-        <div className="mt-20 border-t border-black/10 dark:border-white/10">
-          {skills.map((group, i) => (
-            <motion.div
-              key={group.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group grid items-center gap-6 border-b border-black/10 py-10 transition-colors duration-300 last:border-0 hover:border-secondary/30 md:grid-cols-[220px_1fr] md:gap-10 md:py-14 dark:border-white/10 dark:hover:border-secondary/30"
-            >
-              <div className="flex items-baseline justify-between md:block">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-black/25 dark:text-white/25">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-mono text-sm uppercase tracking-[0.2em] text-text-light transition-colors duration-300 group-hover:text-secondary dark:text-text-dark">
-                    {group.category}
-                  </h3>
-                </div>
-                <p className="hidden font-mono text-xs text-black/30 md:mt-2 md:block dark:text-white/30">
-                  {group.items.length} tools
-                </p>
-              </div>
-
-              <SkillMarquee
-                items={group.items}
-                direction={i % 2 === 0 ? "left" : "right"}
-                speed={30}
-              />
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-16"
+        >
+          <SkillIndex groups={skills} />
+        </motion.div>
       </Container>
     </section>
   );
