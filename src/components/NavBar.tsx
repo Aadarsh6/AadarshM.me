@@ -150,7 +150,7 @@ function NavBar() {
                 A
               </motion.span>
               <span className="hidden font-display text-lg font-semibold tracking-tight text-text-light transition-colors group-hover:text-secondary dark:text-text-dark sm:inline">
-                Aadarsh
+                आदर्श मिश्रा
               </span>
             </a>
 

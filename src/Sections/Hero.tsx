@@ -5,7 +5,7 @@ import Container from "../components/Ui/Container";
 
 const HEADLINE = "Idea in, product out. I handle everything in between.";
 const SUBLINE =
-  "From Figma to production — I ship things that actually work, not just look good in a screenshot.";
+  "I ship things that actually work.";
 
 function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -26,9 +26,10 @@ function Hero() {
             Aadarsh Mishra
           </span>
           <span className="h-1 w-1 rounded-full bg-secondary" />
-          <span className="text-sm font-medium text-text-light/50 dark:text-text-dark/50">
-            Product Designer &amp; Developer
+                    <span className="text-lg font-semibold text-text-light dark:text-[#ff5e24f7] ">
+            आदर्श मिश्रा
           </span>
+          
         </motion.p>
 
         {prefersReducedMotion ? (
