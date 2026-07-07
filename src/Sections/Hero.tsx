@@ -26,7 +26,7 @@ function Hero() {
             Aadarsh Mishra
           </span>
           <span className="h-1 w-1 rounded-full bg-secondary" />
-                    <span className="text-lg font-semibold text-text-light dark:text-[#ff5e24f7] ">
+                    <span className="text-lg font-semibold dark:text-[#ff5e24f7] ">
             आदर्श मिश्रा
           </span>
           

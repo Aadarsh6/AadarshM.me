@@ -219,32 +219,47 @@ function Projects() {
             );
           })}
 
-          {!prefersReducedMotion && (
-            <AnimatePresence>
-              {hoveredProject && (
-                <motion.div
-                  style={{ x: springX, y: springY }}
-                  initial={{ opacity: 0, scale: 0.92 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.92 }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="pointer-events-none absolute left-0 top-0 z-20 hidden h-64 w-80 -ml-40 -mt-72 overflow-hidden rounded-2xl border border-black/10 shadow-2xl md:block dark:border-white/10"
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={hoveredProject.id}
-                      src={hoveredProject.coverImage}
-                      alt={hoveredProject.title}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="h-full w-full object-cover"
-                    />
-                  </AnimatePresence>
-                </motion.div>
-              )}
-            </AnimatePresence>
+{!prefersReducedMotion && (
+  <AnimatePresence>
+    {hoveredProject && (
+      <motion.div
+        style={{ x: springX, y: springY }}
+        initial={{ opacity: 0, scale: 0.85, rotate: -3 }}
+        animate={{ opacity: 1, scale: 1, rotate: -1 }}
+        exit={{ opacity: 0, scale: 0.88, rotate: 2 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="pointer-events-none absolute left-0 top-0 z-20 hidden h-64 w-80 -ml-40 -mt-72 md:block"
+      >
+        {/* Big, obviously-visible colored glow */}
+        <div className="absolute -inset-6 rounded-[2rem] bg-secondary/40 blur-[40px]" />
+
+        {/* Frame — real visible border in secondary color, not a faint ring */}
+        <div className="relative h-full w-full overflow-hidden rounded-2xl border-2 border-secondary/50 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={hoveredProject.id}
+              src={hoveredProject.coverImage}
+              alt={hoveredProject.title}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="h-full w-full object-cover"
+            />
+          </AnimatePresence>
+
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+          {/* Obvious corner tag in your accent color */}
+          <div className="absolute bottom-3 left-3 rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+            View project
+          </div>
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+
+
           )}
         </div>
       </Container>

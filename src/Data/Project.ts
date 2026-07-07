@@ -43,7 +43,7 @@ export const projects: Project[] = [
      description:
       "A tool that helps you draft high-engagement X/Twitter posts using prompt-engineered generation, tuned around what actually performs well on the platform.",
     tech: ["React", "Tailwind", "Chrome extension", "persistent connection", "..."],
-    coverImage: "/projects/project2-.png",
+    coverImage: "/projects/project2-2.png",
         link: "https://xcraft.aadarshm.me/",
     sections: [
       { label: "Overview", content: "What this project is, in 2 sentences.", image: "/src/assets/project2-1.png" },
