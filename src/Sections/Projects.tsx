@@ -166,13 +166,7 @@ function Projects() {
                           className="h-48 w-full rounded-xl border border-black/10 object-cover dark:border-white/10 md:h-full"
                         />
 
-                        <div>
-                          {/* Real write-up — falls back to blurb if you
-                              haven't filled in a description yet */}
-                          <p className="text-base leading-relaxed text-text-light/70 dark:text-text-dark/70">
-                            {project.description ?? project.blurb}
-                          </p>
-
+                        <div>                          
                           <div className="mt-4 flex flex-wrap gap-2">
                             {project.tech.map((t) => (
                               <span
