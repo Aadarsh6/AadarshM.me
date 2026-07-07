@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SIGNATURE_PATH_D, SIGNATURE_VIEWBOX } from "../Data/SignaturePath";
-import { useTheme } from "@/Context/ThemeContext";
+import { useTheme } from "../Context/ThemeContext";
+// import { useTheme } from "@/Context/ThemeContext";
 
 const REVEAL_DURATION = 1.3;
 const FILL_DELAY_RATIO = 0.88;
