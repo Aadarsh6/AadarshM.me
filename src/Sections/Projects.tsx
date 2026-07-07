@@ -166,7 +166,12 @@ function Projects() {
                           className="h-48 w-full rounded-xl border border-black/10 object-cover dark:border-white/10 md:h-full"
                         />
 
-                        <div>                          
+                        <div>
+
+                          <p className="text-base leading-relaxed text-text-light/70 dark:text-text-dark/70">
+                            {project.description}
+                          </p>
+
                           <div className="mt-4 flex flex-wrap gap-2">
                             {project.tech.map((t) => (
                               <span

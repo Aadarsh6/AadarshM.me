@@ -49,7 +49,7 @@ function Contact() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-14"
         >
-          <CopyableEmail email="you@email.com" />
+          <CopyableEmail email="aadarshakmishra16@email.com" />
         </motion.div>
 
         <motion.div
