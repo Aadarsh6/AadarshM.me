@@ -21,6 +21,10 @@ import {
   SiExpress,
   SiFirebase,
   SiVercel,
+  SiPrisma,
+  SiPostman,
+  SiWebrtc,
+  SiSolana,
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 
@@ -55,6 +59,10 @@ const ICON_MAP: Record<string, IconType> = {
   express: SiExpress,
   firebase: SiFirebase,
   vercel: SiVercel,
+  prisma: SiPrisma,
+  postman: SiPostman,
+  webrtc: SiWebrtc,
+  solana: SiSolana,
 };
 
 function normalize(label: string) {
