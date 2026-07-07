@@ -145,7 +145,7 @@ function ProjectDetail({ project, onClose }: ProjectDetailProps) {
             />
           </div>
         </div>
-      </motion.div>                                              
+      </motion.div>
     </AnimatePresence>
   );
 }
