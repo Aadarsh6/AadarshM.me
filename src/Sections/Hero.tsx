@@ -3,7 +3,9 @@ import BlueprintField from "../components/Ui/BlueprintField";
 import MagneticButton from "../components/Ui/MagneticButton";
 import Container from "../components/Ui/Container";
 
-const HEADLINE = "Your bold positioning statement goes here.";
+const HEADLINE = "Idea in, product out. I handle everything in between.";
+const SUBLINE =
+  "From Figma to production — I ship things that actually work, not just look good in a screenshot.";
 
 function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -18,9 +20,15 @@ function Hero() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6 text-sm tracking-wide text-text-light/50 dark:text-text-dark/50"
+          className="mb-5 flex items-center gap-3"
         >
-          Aadarsh Mishra — Product Designer &amp; Developer
+          <span className="font-display text-lg font-bold text-text-light dark:text-text-dark">
+            Aadarsh Mishra
+          </span>
+          <span className="h-1 w-1 rounded-full bg-secondary" />
+          <span className="text-sm font-medium text-text-light/50 dark:text-text-dark/50">
+            Product Designer &amp; Developer
+          </span>
         </motion.p>
 
         {prefersReducedMotion ? (
@@ -28,16 +36,16 @@ function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl font-display text-5xl font-bold leading-[1.08] tracking-tight text-text-light md:text-7xl dark:text-text-dark"
+            className="max-w-2xl font-display text-4xl font-bold leading-[1.15] tracking-tight text-text-light md:text-6xl dark:text-text-dark"
           >
             {HEADLINE}
           </motion.h1>
         ) : (
-          <h1 className="max-w-3xl font-display text-5xl font-bold leading-[1.08] tracking-tight text-text-light md:text-7xl dark:text-text-dark">
+          <h1 className="max-w-2xl font-display text-4xl font-bold leading-[1.15] tracking-tight text-text-light md:text-6xl dark:text-text-dark">
             {words.map((word, i) => (
               <motion.span
                 key={i}
-                initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+                initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.6, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
                 className="mr-[0.28em] inline-block"
@@ -51,21 +59,21 @@ function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
           className="mt-6 max-w-lg text-lg leading-relaxed text-text-light/60 dark:text-text-dark/60"
         >
-          A one-to-two line subline explaining what you do, for who, and why it matters.
+          {SUBLINE}
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.65 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
           className="mt-10 flex items-center gap-8"
         >
           <MagneticButton
             href="#projects"
-            className="inline-block rounded-full bg-accent px-7 py-3.5 font-medium text-white  duration-300 ease-out hover:shadow-[0_12px_28px_-8px_rgba(255,90,31,0.6)]"
+            className="inline-block rounded-full bg-accent px-7 py-3.5 font-medium text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.25)] transition-shadow duration-300 ease-out hover:shadow-[0_12px_28px_-8px_rgba(0,0,0,0.32)] dark:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.5)] dark:hover:shadow-[0_12px_28px_-8px_rgba(0,0,0,0.6)]"
           >
             View my work
           </MagneticButton>
