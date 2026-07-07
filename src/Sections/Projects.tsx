@@ -6,16 +6,15 @@ import {
   useSpring,
   useReducedMotion,
 } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
+import { SiGithub } from "react-icons/si";
 import { projects } from "../Data/Project";
-import ProjectDetail from "../components/ProjectDetails";
-import type { Project } from "../Data/Project";
 import Container from "../components/Ui/Container";
 import SectionHeading from "../components/Ui/SectionHeader";
 
 function Projects() {
-  const [selected, setSelected] = useState<Project | null>(null);
   const [hovered, setHovered] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
@@ -33,6 +32,14 @@ function Projects() {
 
   const hoveredProject = hovered !== null ? projects[hovered] : null;
 
+  const toggleExpanded = (id: string) => {
+    setExpanded((curr) => (curr === id ? null : id));
+  };
+
+  // Stops the row's own click (dropdown toggle) from firing when a link
+  // inside the row is clicked.
+  const stop = (e: React.MouseEvent) => e.stopPropagation();
+
   return (
     <section id="projects" className="relative py-24 md:py-32">
       <Container>
@@ -49,74 +56,169 @@ function Projects() {
           onMouseLeave={() => setHovered(null)}
           className="relative border-t border-black/10 dark:border-white/10"
         >
-          {projects.map((project, i) => (
-            <motion.button
-              key={project.id}
-              type="button"
-              onMouseEnter={() => setHovered(i)}
-              onClick={() => setSelected(project)}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="group relative flex w-full items-center justify-between gap-4 border-b border-black/10 py-8 text-left last:border-0 dark:border-white/10 md:py-10"
-            >
-              <div className="flex items-center gap-5 md:gap-8">
-                <span className="font-mono text-sm text-text-light/30 dark:text-text-dark/30">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3
-                    className={`font-display text-2xl font-bold tracking-tight transition-colors duration-300 md:text-4xl ${
-                      hovered === i
-                        ? "text-secondary"
-                        : "text-text-light dark:text-text-dark"
-                    }`}
-                  >
-                    {project.title}
-                  </h3>
-                  {/* Tech shown inline on mobile — no room for a separate
-                      column at narrow widths */}
-                  <p className="mt-1 font-mono text-xs uppercase tracking-wide text-text-light/35 dark:text-text-dark/35 md:hidden">
-                    {project.tech.slice(0, 3).join(" · ")}
-                  </p>
-                </div>
-              </div>
+          {projects.map((project, i) => {
+            const isExpanded = expanded === project.id;
 
-              <div className="flex items-center gap-6">
-                <div className="hidden items-center gap-4 md:flex">
-                  {project.tech.slice(0, 3).map((t) => (
-                    <span
-                      key={t}
-                      className="font-mono text-xs uppercase tracking-wide text-text-light/40 dark:text-text-dark/40"
-                    >
-                      {t}
+            return (
+              <div
+                key={project.id}
+                className="border-b border-black/10 last:border-0 dark:border-white/10"
+              >
+                {/* Row click toggles the dropdown */}
+                <motion.div
+                  role="button"
+                  tabIndex={0}
+                  onMouseEnter={() => setHovered(i)}
+                  onClick={() => toggleExpanded(project.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") toggleExpanded(project.id);
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: i * 0.05 }}
+                  aria-expanded={isExpanded}
+                  className="group relative flex w-full cursor-pointer items-center justify-between gap-4 py-8 text-left md:py-10"
+                >
+                  <div className="flex items-center gap-5 md:gap-8">
+                    <span className="font-mono text-sm text-text-light/30 dark:text-text-dark/30">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                  ))}
-                </div>
+                    <div>
+                      <h3
+                        className={`font-display text-2xl font-bold tracking-tight transition-colors duration-300 md:text-4xl ${
+                          hovered === i
+                            ? "text-secondary"
+                            : "text-text-light dark:text-text-dark"
+                        }`}
+                      >
+                        {project.title}
+                      </h3>
+                      <p className="mt-1 font-mono text-xs uppercase tracking-wide text-text-light/35 dark:text-text-dark/35 md:hidden">
+                        {project.tech.slice(0, 3).join(" · ")}
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Static thumbnail for touch devices — there's no cursor
-                    to drive the floating preview there */}
-                <img
-                  src={project.coverImage}
-                  alt=""
-                  className="h-12 w-16 shrink-0 rounded-md object-cover md:hidden"
-                />
+                  <div className="flex items-center gap-3 md:gap-6">
+                    <div className="hidden items-center gap-4 md:flex">
+                      {project.tech.slice(0, 3).map((t) => (
+                        <span
+                          key={t}
+                          className="font-mono text-xs uppercase tracking-wide text-text-light/40 dark:text-text-dark/40"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
 
-                <ArrowUpRight
-                  size={22}
-                  className={`hidden shrink-0 transition-all duration-300 md:block ${
-                    hovered === i
-                      ? "-translate-y-1 translate-x-1 text-secondary"
-                      : "text-text-light/30 dark:text-text-dark/30"
-                  }`}
-                />
+                    <img
+                      src={project.coverImage}
+                      alt=""
+                      className="h-12 w-16 shrink-0 rounded-md object-cover md:hidden"
+                    />
+
+                    {/* Goes straight to the live site — its own hit target,
+                        separate from the row's dropdown toggle */}
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={stop}
+                        aria-label={`Open ${project.title} live site`}
+                        className={`hidden shrink-0 transition-all duration-300 md:block ${
+                          hovered === i
+                            ? "-translate-y-1 translate-x-1 text-secondary"
+                            : "text-text-light/30 dark:text-text-dark/30"
+                        }`}
+                      >
+                        <ExternalLink size={22} />
+                      </a>
+                    )}
+
+                    {/* Dropdown toggle indicator — visual only, the whole
+                        row already handles the click */}
+                    <motion.span
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-black/10 text-text-light/50 dark:border-white/15 dark:text-text-dark/50"
+                    >
+                      <ChevronDown size={16} />
+                    </motion.span>
+                  </div>
+                </motion.div>
+
+                {/* Accordion detail panel */}
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid gap-8 pb-10 md:grid-cols-[1fr_1.4fr]">
+                        <img
+                          src={project.coverImage}
+                          alt={project.title}
+                          className="h-48 w-full rounded-xl border border-black/10 object-cover dark:border-white/10 md:h-full"
+                        />
+
+                        <div>
+                          {/* Real write-up — falls back to blurb if you
+                              haven't filled in a description yet */}
+                          <p className="text-base leading-relaxed text-text-light/70 dark:text-text-dark/70">
+                            {project.description ?? project.blurb}
+                          </p>
+
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {project.tech.map((t) => (
+                              <span
+                                key={t}
+                                className="rounded-full border border-secondary/20 bg-secondary/[0.06] px-3 py-1 text-xs text-text-light/70 dark:text-text-dark/70"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+
+                          <div className="mt-6 flex gap-5">
+                            {project.link && (
+                              <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={stop}
+                                className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
+                              >
+                                <ExternalLink size={15} />
+                                Visit site
+                              </a>
+                            )}
+                            {project.github && (
+                              <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={stop}
+                                className="inline-flex items-center gap-1.5 text-sm font-medium text-text-light/70 hover:text-secondary dark:text-text-dark/70"
+                              >
+                                <SiGithub size={14} />
+                                GitHub
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </motion.button>
-          ))}
+            );
+          })}
 
-          {/* Cursor-following image preview — desktop only, skipped
-              entirely under reduced motion since it's pure embellishment */}
           {!prefersReducedMotion && (
             <AnimatePresence>
               {hoveredProject && (
@@ -146,12 +248,6 @@ function Projects() {
           )}
         </div>
       </Container>
-
-      <AnimatePresence>
-        {selected && (
-          <ProjectDetail project={selected} onClose={() => setSelected(null)} />
-        )}
-      </AnimatePresence>
     </section>
   );
 }
