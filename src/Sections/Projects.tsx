@@ -30,7 +30,9 @@ function Projects() {
     mouseY.set(e.clientY - rect.top);
   };
 
-  const hoveredProject = hovered !== null ? projects[hovered] : null;
+  // Suppressed while any row is expanded — the detail panel already shows
+  // the image, so the floating preview would just be redundant clutter.
+  const hoveredProject = hovered !== null && expanded === null ? projects[hovered] : null;
 
   const toggleExpanded = (id: string) => {
     setExpanded((curr) => (curr === id ? null : id));
@@ -167,9 +169,10 @@ function Projects() {
                         />
 
                         <div>
-
+                          {/* Real write-up — falls back to blurb if you
+                              haven't filled in a description yet */}
                           <p className="text-base leading-relaxed text-text-light/70 dark:text-text-dark/70">
-                            {project.description}
+                            {project.description ?? project.blurb}
                           </p>
 
                           <div className="mt-4 flex flex-wrap gap-2">
@@ -218,47 +221,53 @@ function Projects() {
             );
           })}
 
-{!prefersReducedMotion && (
-  <AnimatePresence>
-    {hoveredProject && (
-      <motion.div
-        style={{ x: springX, y: springY }}
-        initial={{ opacity: 0, scale: 0.85, rotate: -3 }}
-        animate={{ opacity: 1, scale: 1, rotate: -1 }}
-        exit={{ opacity: 0, scale: 0.88, rotate: 2 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute left-0 top-0 z-20 hidden h-64 w-80 -ml-40 -mt-72 md:block"
-      >
-        {/* Big, obviously-visible colored glow */}
-        <div className="absolute -inset-6 rounded-[2rem] bg-secondary/40 blur-[40px]" />
+          {!prefersReducedMotion && (
+            <AnimatePresence>
+              {hoveredProject && (
+                <motion.div
+                  style={{ x: springX, y: springY }}
+                  initial={{ opacity: 0, scale: 0.85, rotate: -3 }}
+                  animate={{ opacity: 1, scale: 1, rotate: -1 }}
+                  exit={{ opacity: 0, scale: 0.88, rotate: 2 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="pointer-events-none absolute left-0 top-0 z-20 hidden h-72 w-80 -ml-40 -mt-80 md:block"
+                >
+                  {/* Mounted-print card: opaque surface + layered shadow does
+                      the "premium" work, not a translucent colored glow —
+                      a soft blur at low opacity has almost no contrast
+                      against a warm background, which is why it read pale. */}
 
-        {/* Frame — real visible border in secondary color, not a faint ring */}
-        <div className="relative h-full w-full overflow-hidden rounded-2xl border-2 border-secondary/50 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={hoveredProject.id}
-              src={hoveredProject.coverImage}
-              alt={hoveredProject.title}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="h-full w-full object-cover"
-            />
-          </AnimatePresence>
+                  <div className="flex h-full w-full flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white p-2.5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] dark:border-white/10 dark:bg-[#1A1A1D]">
+                    <div className="relative flex-1 overflow-hidden rounded-xl">
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={hoveredProject.id}
+                          src={hoveredProject.coverImage}
+                          alt={hoveredProject.title}
+                          initial={{ opacity: 0, scale: 1.08 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="h-full w-full object-cover"
+                        />
+                      </AnimatePresence>
+                    </div>
 
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-
-          {/* Obvious corner tag in your accent color */}
-          <div className="absolute bottom-3 left-3 rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
-            View project
-          </div>
-        </div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-
-
+                    {/* Caption sits in the mount margin, not overlaid on
+                        the image — reads as a print label, not a sticker. */}
+                    <div className="mt-2.5 flex items-center justify-between border-t border-black/[0.06] pt-2.5 dark:border-white/10">
+                      <span className="min-w-0 truncate pr-2 font-display text-sm font-medium text-text-light dark:text-text-dark">
+                        {hoveredProject.title}
+                      </span>
+                      <span className="flex shrink-0 items-center gap-1 text-[11px] font-bold uppercase tracking-wide text-accent">
+                        View
+                        <ExternalLink size={11} />
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           )}
         </div>
       </Container>
@@ -267,3 +276,4 @@ function Projects() {
 }
 
 export default Projects;
+
