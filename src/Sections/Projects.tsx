@@ -30,16 +30,11 @@ function Projects() {
     mouseY.set(e.clientY - rect.top);
   };
 
-  // Suppressed while any row is expanded — the detail panel already shows
-  // the image, so the floating preview would just be redundant clutter.
   const hoveredProject = hovered !== null && expanded === null ? projects[hovered] : null;
 
   const toggleExpanded = (id: string) => {
     setExpanded((curr) => (curr === id ? null : id));
   };
-
-  // Stops the row's own click (dropdown toggle) from firing when a link
-  // inside the row is clicked.
   const stop = (e: React.MouseEvent) => e.stopPropagation();
 
   return (
@@ -120,7 +115,7 @@ function Projects() {
                       className="h-12 w-16 shrink-0 rounded-md object-cover md:hidden"
                     />
 
-                    {/* Goes straight to the live site — its own hit target,
+                    {/* Goes straight to the live site its own hit target,
                         separate from the row's dropdown toggle */}
                     {project.link && (
                       <a
@@ -139,7 +134,7 @@ function Projects() {
                       </a>
                     )}
 
-                    {/* Dropdown toggle indicator — visual only, the whole
+                    {/* Dropdown toggle indicator visual only, the whole
                         row already handles the click */}
                     <motion.span
                       animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -169,10 +164,9 @@ function Projects() {
                         />
 
                         <div>
-                          {/* Real write-up — falls back to blurb if you
-                              haven't filled in a description yet */}
+                          Real write-up — falls back to blurb if 
                           <p className="text-base leading-relaxed text-text-light/70 dark:text-text-dark/70">
-                            {project.description ?? project.blurb}
+                            {project.description}
                           </p>
 
                           <div className="mt-4 flex flex-wrap gap-2">
@@ -232,11 +226,8 @@ function Projects() {
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="pointer-events-none absolute left-0 top-0 z-20 hidden h-72 w-80 -ml-40 -mt-80 md:block"
                 >
-                  {/* Mounted-print card: opaque surface + layered shadow does
-                      the "premium" work, not a translucent colored glow —
-                      a soft blur at low opacity has almost no contrast
-                      against a warm background, which is why it read pale. */}
 
+                    <div className="absolute -inset-6 rounded-[2rem] bg-secondary/40 blur-[40px]" />
                   <div className="flex h-full w-full flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white p-2.5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] dark:border-white/10 dark:bg-[#1A1A1D]">
                     <div className="relative flex-1 overflow-hidden rounded-xl">
                       <AnimatePresence mode="wait">
