@@ -30,7 +30,7 @@ function About() {
             transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-4xl font-display text-3xl font-medium leading-[1.12] tracking-tight text-text-light md:text-5xl dark:text-text-dark"
           >
-            I build interfaces that feel calm to use, clear to understand, and polished enough to stand out.
+            Building products from idea to deployment with a focus on performance, usability, and solving real problems.
           </motion.h2>
 
           <motion.div
@@ -41,14 +41,12 @@ function About() {
             className="mt-8 max-w-3xl text-base leading-[1.85] text-text-light/70 dark:text-text-dark/70 md:text-lg"
           >
             <p>
-              I&apos;m Aadarsh Mishra, a Fullstack and ML Developer from Delhi focused on building modern
-              portfolio websites, product pages, and UI systems with a strong sense of structure
-              and detail.
+              I&apos;m Aadarsh Mishra, a Full Stack Developer who enjoys turning ideas into real products. From designing intuitive interfaces to building scalable backends and integrating AI.
+
+           
             </p>
             <p className="mt-5">
-              My work sits between design and engineering: I care about spacing, hierarchy,
-              performance, and the small interactions that make a product feel considered rather
-              than just finished.
+              Over the past few years I've built productivity tools, AI-powered applications, and modern web experiences using React, TypeScript, Node.js, PostgreSQL, and other modern technologies. I'm constantly exploring new areas like machine learning and Web3, always looking for better ways to build products that are fast, reliable, and genuinely useful.
             </p>
           </motion.div>
 
