@@ -48,6 +48,9 @@ function NavBar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      if (currentScrollY < 150) {
+        setActiveHref(null);
+}
       const diff = currentScrollY - lastScrollY.current;
 
       setScrolled(currentScrollY > 20);
