@@ -8,8 +8,12 @@ import Projects from "./Sections/Projects";
 import Contact from "./Sections/Contact";
 import CustomCursor from "./components/Ui/CustomCursor";
 import IntroSignature from "./components/IntroSignature";
+// import { useLenis } from "lenis/react";
 
 function Portfolio() {
+
+//  useLenis()
+
   const [introDone, setIntroDone] = useState(false);
 
   useEffect(() => {
